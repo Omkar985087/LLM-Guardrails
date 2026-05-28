@@ -1,0 +1,111 @@
+# ============================================================
+# LLM Guardrails Gateway — Policy Configuration
+# ============================================================
+# This file controls all guardrail behavior. Non-engineers can
+# edit patterns, toggle checks, and define content policies
+# without touching any Python code.
+# ============================================================
+
+# === INPUT GUARDRAILS ===
+input_guardrails:
+
+  # --- PII Detection ---
+  # Blocks user prompts that contain sensitive personal information.
+  pii_detection:
+    enabled: true
+    block_patterns:
+      - name: credit_card
+        pattern: '\b(?:\d[ -]*?){13,16}\b'
+        message: "🚫 Credit card number detected — blocked for PII safety."
+      - name: ssn
+        pattern: '\b\d{3}-\d{2}-\d{4}\b'
+        message: "🚫 SSN detected — blocked for PII safety."
+      - name: email
+        pattern: '\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
+        message: "🚫 Email address detected — blocked for PII safety."
+      - name: phone
+        pattern: '\b(?:\+?1[-.\s]?)?(?:\(\d{3}\)|\d{3})[-.\s]?\d{3}[-.\s]?\d{4}\b'
+        message: "🚫 Phone number detected — blocked for PII safety."
+
+  # --- Prompt Injection / Jailbreak Detection ---
+  # Catches attempts to override system instructions.
+  prompt_injection:
+    enabled: true
+    block_patterns:
+      - pattern: '(?i)ignore\s+(all\s+)?(previous|above|prior)\s+(instructions|prompts|rules)'
+        message: "🚫 Prompt injection attempt detected."
+      - pattern: '(?i)you\s+are\s+now\s+(a|an|in)\s+(unrestricted|unfiltered|DAN|jailbreak)'
+        message: "🚫 Jailbreak attempt detected."
+      - pattern: '(?i)pretend\s+(you\s+are|to\s+be)\s+(a|an)\s+'
+        message: "🚫 Role-override attempt detected."
+      - pattern: '(?i)disregard\s+(your|all|any)\s+(rules|guidelines|instructions|safety)'
+        message: "🚫 Instruction override attempt detected."
+      - pattern: '(?i)system\s*prompt\s*[:=]'
+        message: "🚫 System prompt manipulation detected."
+
+  # Maximum allowed input length (characters)
+  max_input_length: 4000
+
+# === OUTPUT GUARDRAILS ===
+output_guardrails:
+
+  # --- Toxicity / Profanity Check ---
+  toxicity_check:
+    enabled: true
+    message: "⚠️ Response contained inappropriate content and was filtered."
+
+  # --- Topic Adherence ---
+  # Ensures the LLM response stays within allowed topics.
+  topic_adherence:
+    enabled: true
+    allowed_topics:
+      - "technology"
+      - "science"
+      - "programming"
+      - "business"
+      - "education"
+      - "general knowledge"
+    off_topic_keywords: []  # Optional: regex patterns that indicate off-topic content
+    message: "⚠️ Response went off-topic and was filtered."
+
+  # --- JSON Schema Validation ---
+  # When enabled, validates the LLM output against a JSON schema.
+  schema_validation:
+    enabled: false
+    json_schema: null  # Paste a JSON Schema object here when enabled
+
+  # Maximum allowed output length (characters)
+  max_output_length: 2000
+
+# === CONTENT POLICIES ===
+content_policies:
+
+  # --- Blocked Topics ---
+  # Regex patterns for topics the LLM must never engage with.
+  blocked_topics:
+    - pattern: '(?i)\b(medical|health)\s*(advice|diagnosis|treatment|prescription)\b'
+      message: "🚫 This service cannot provide medical advice."
+    - pattern: '(?i)\b(legal)\s*(advice|counsel|opinion)\b'
+      message: "🚫 This service cannot provide legal advice."
+
+  # --- Mandatory Rules ---
+  # These are injected into the system prompt sent to the LLM.
+  mandatory_rules:
+    - "Always cite sources when providing factual claims."
+    - "Never discuss competitor products or services."
+    - "Respond only in English."
+    - "If you are unsure, say so honestly rather than guessing."
+
+  # --- Custom Blocked Phrases ---
+  # Block specific words or phrases in both input and output.
+  custom_blocked_phrases:
+    - pattern: '(?i)\bcompetitor_name\b'
+      message: "🚫 Discussion of competitors is not permitted."
+
+# === LLM SETTINGS ===
+llm:
+  model: "gemini-2.0-flash"
+  temperature: 0.7
+  max_output_tokens: 1024
+  retry_on_output_violation: true
+  max_retries: 2
