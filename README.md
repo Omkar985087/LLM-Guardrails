@@ -54,7 +54,8 @@ pip install -r requirements.txt
 Create a `.env` file in the project root:
 
 ```env
-GOOGLE_API_KEY=your-google-api-key-here
+GOOGLE_API_KEY="AIzaSyAeSMZ9lO5-4tG26M3WHkI1w70XBQO0txo"
+
 ```
 
 > Get a free API key from [Google AI Studio](https://aistudio.google.com/apikey).
