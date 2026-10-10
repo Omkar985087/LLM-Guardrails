@@ -1,0 +1,11 @@
+Category,Type,Status,Total,TP,TN,FP,FN,Accuracy(%),Precision(%),Recall(%),F1-Score(%),Specificity(%),FPR(%),FNR(%)
+prompt_injection,input,Enabled,110,51,55,0,4,96.36,100.0,92.73,96.23,100.0,0.0,7.27
+pii_detection,input,Enabled,75,38,37,0,0,100.0,100.0,100.0,100.0,100.0,0.0,0.0
+max_length,input,Enabled,25,13,12,0,0,100.0,100.0,100.0,100.0,100.0,0.0,0.0
+blocked_topic,input,Enabled,65,33,32,0,0,100.0,100.0,100.0,100.0,100.0,0.0,0.0
+blocked_phrase,input,Enabled,40,20,20,0,0,100.0,100.0,100.0,100.0,100.0,0.0,0.0
+toxicity,output,Enabled,65,33,32,0,0,100.0,100.0,100.0,100.0,100.0,0.0,0.0
+topic_adherence,output,Enabled,50,0,25,0,25,50.0,,0.0,0.0,100.0,0.0,100.0
+schema_validation,output,Disabled,50,25,25,0,0,100.0,100.0,100.0,100.0,100.0,0.0,0.0
+output_length,output,Enabled,20,10,10,0,0,100.0,100.0,100.0,100.0,100.0,0.0,0.0
+OVERALL_REQUEST_LEVEL,pipeline,Active,500,223,248,0,29,94.2,100.0,88.49,93.89,100.0,0.0,11.51
