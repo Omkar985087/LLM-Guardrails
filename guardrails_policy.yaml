@@ -104,7 +104,11 @@ content_policies:
 
 # === LLM SETTINGS ===
 llm:
+<<<<<<< HEAD
   model: "gemini-3.8-flash"
+=======
+  model: "gemini-2.0-flash"
+>>>>>>> 41a27c22ffe0732f0ad03e20dc6fc7f63887f5ed
   temperature: 0.7
   max_output_tokens: 1024
   retry_on_output_violation: true

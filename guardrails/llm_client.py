@@ -2,21 +2,31 @@
 LLM Client — wraps Google Gemini (google-genai) for the guardrails gateway.
 
 Handles:
+<<<<<<< HEAD
 - Loading environment variables reliably from the project root
 - Managing the Google Gemini client singleton
 - Building the system prompt with mandatory policy rules
 - Normalizing and resolving Gemini model names (default: gemini-3.8-flash)
 - Calling the Gemini API and handling retries/errors cleanly
+=======
+- Building the system prompt with mandatory policy rules
+- Calling the Gemini API
+- Retry logic when output guardrails fail
+>>>>>>> 41a27c22ffe0732f0ad03e20dc6fc7f63887f5ed
 """
 
 from __future__ import annotations
 
 import os
+<<<<<<< HEAD
 from pathlib import Path
+=======
+>>>>>>> 41a27c22ffe0732f0ad03e20dc6fc7f63887f5ed
 from typing import Any, Optional
 
 from dotenv import load_dotenv
 from google import genai
+<<<<<<< HEAD
 from google.genai import errors, types
 
 from guardrails.policy import Policy
@@ -151,6 +161,14 @@ def format_llm_error(exc: Exception, model_name: str = "") -> str:
         return "Unable to connect to LLM provider. Please check network connectivity."
 
     return f"LLM provider call failed: {exc_str}"
+=======
+from google.genai import types
+
+from guardrails.policy import Policy
+
+# Load environment variables
+load_dotenv()
+>>>>>>> 41a27c22ffe0732f0ad03e20dc6fc7f63887f5ed
 
 
 # ---------------------------------------------------------------------------
@@ -158,6 +176,7 @@ def format_llm_error(exc: Exception, model_name: str = "") -> str:
 # ---------------------------------------------------------------------------
 
 _client: Optional[genai.Client] = None
+<<<<<<< HEAD
 _cached_api_key: Optional[str] = None
 
 
@@ -175,6 +194,20 @@ def get_client() -> genai.Client:
     if _client is None or _cached_api_key != api_key:
         _client = genai.Client(api_key=api_key)
         _cached_api_key = api_key
+=======
+
+
+def get_client() -> genai.Client:
+    """Return a cached Gemini client, creating it on first call."""
+    global _client
+    if _client is None:
+        api_key = os.getenv("GOOGLE_API_KEY")
+        if not api_key or api_key == "your-api-key-here":
+            raise RuntimeError(
+                "GOOGLE_API_KEY not set. Add it to your .env file."
+            )
+        _client = genai.Client(api_key=api_key)
+>>>>>>> 41a27c22ffe0732f0ad03e20dc6fc7f63887f5ed
     return _client
 
 
@@ -233,7 +266,10 @@ def generate(
     """
     client = get_client()
     system_prompt = build_system_prompt(policy)
+<<<<<<< HEAD
     model_name = normalize_model_name(get_model_name(policy))
+=======
+>>>>>>> 41a27c22ffe0732f0ad03e20dc6fc7f63887f5ed
 
     # If we're retrying, append the correction hint
     full_prompt = prompt
@@ -245,7 +281,11 @@ def generate(
         )
 
     response = client.models.generate_content(
+<<<<<<< HEAD
         model=model_name,
+=======
+        model=policy.llm.model,
+>>>>>>> 41a27c22ffe0732f0ad03e20dc6fc7f63887f5ed
         contents=full_prompt,
         config=types.GenerateContentConfig(
             system_instruction=system_prompt,

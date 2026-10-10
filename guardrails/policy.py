@@ -12,6 +12,7 @@ import os
 from pathlib import Path
 from typing import Any, Optional
 
+<<<<<<< HEAD
 from dotenv import load_dotenv
 import yaml
 from pydantic import BaseModel, Field
@@ -22,6 +23,11 @@ ENV_FILE = PROJECT_ROOT / ".env"
 if ENV_FILE.exists():
     load_dotenv(dotenv_path=ENV_FILE)
 
+=======
+import yaml
+from pydantic import BaseModel, Field
+
+>>>>>>> 41a27c22ffe0732f0ad03e20dc6fc7f63887f5ed
 
 # ---------------------------------------------------------------------------
 # Policy sub-models
@@ -81,7 +87,11 @@ class ContentPoliciesConfig(BaseModel):
 
 
 class LLMConfig(BaseModel):
+<<<<<<< HEAD
     model: str = "gemini-3.8-flash"
+=======
+    model: str = "gemini-2.0-flash"
+>>>>>>> 41a27c22ffe0732f0ad03e20dc6fc7f63887f5ed
     temperature: float = 0.7
     max_output_tokens: int = 1024
     retry_on_output_violation: bool = True
@@ -132,6 +142,7 @@ def load_policy(path: str | Path | None = None) -> Policy:
     with open(path, "r", encoding="utf-8") as fh:
         raw: dict = yaml.safe_load(fh) or {}
 
+<<<<<<< HEAD
     # Allow GEMINI_MODEL environment variable to override YAML setting
     env_model = os.getenv("GEMINI_MODEL")
     if env_model and env_model.strip():
@@ -140,6 +151,8 @@ def load_policy(path: str | Path | None = None) -> Policy:
         elif "llm" not in raw:
             raw["llm"] = {"model": env_model.strip()}
 
+=======
+>>>>>>> 41a27c22ffe0732f0ad03e20dc6fc7f63887f5ed
     _policy_cache = Policy(**raw)
     return _policy_cache
 

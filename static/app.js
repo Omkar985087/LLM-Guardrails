@@ -19,13 +19,19 @@ const policyContent = document.getElementById("policy-content");
 // ── State ────────────────────────────────────────────────────────────────
 let isLoading = false;
 let welcomeVisible = true;
+<<<<<<< HEAD
 let cachedEvaluationData = null;
+=======
+>>>>>>> 41a27c22ffe0732f0ad03e20dc6fc7f63887f5ed
 
 // ── Init ─────────────────────────────────────────────────────────────────
 document.addEventListener("DOMContentLoaded", () => {
     loadPolicy();
     setupEventListeners();
+<<<<<<< HEAD
     setupMetricsEventListeners();
+=======
+>>>>>>> 41a27c22ffe0732f0ad03e20dc6fc7f63887f5ed
     autoResize(chatInput);
 });
 
@@ -113,10 +119,13 @@ async function handleSubmit(e) {
             addChatBubble(data.message || "Request blocked by guardrails.", "blocked");
         } else if (data.status === "filtered") {
             addChatBubble(data.message || "Response filtered by guardrails.", "filtered");
+<<<<<<< HEAD
         } else if (data.status === "error") {
             addChatBubble(data.message || "LLM provider error occurred.", "error");
         } else {
             addChatBubble(data.message || "Unexpected response status.", "error");
+=======
+>>>>>>> 41a27c22ffe0732f0ad03e20dc6fc7f63887f5ed
         }
 
         // Update guardrail results panel
@@ -124,7 +133,11 @@ async function handleSubmit(e) {
 
     } catch (err) {
         loadingEl.remove();
+<<<<<<< HEAD
         addChatBubble(`Error: ${err.message}`, "error");
+=======
+        addChatBubble(`Error: ${err.message}`, "blocked");
+>>>>>>> 41a27c22ffe0732f0ad03e20dc6fc7f63887f5ed
     } finally {
         isLoading = false;
         btnSend.disabled = false;
@@ -141,7 +154,10 @@ function addChatBubble(text, type) {
     if (type === "assistant") label = "Assistant";
     else if (type === "blocked") label = "🚫 Blocked";
     else if (type === "filtered") label = "⚠️ Filtered";
+<<<<<<< HEAD
     else if (type === "error") label = "⚠️ Provider Error";
+=======
+>>>>>>> 41a27c22ffe0732f0ad03e20dc6fc7f63887f5ed
 
     if (label) {
         bubble.innerHTML = `<span class="bubble-label">${label}</span>${escapeHtml(text)}`;
@@ -202,7 +218,10 @@ function createStatusBadge(status) {
         passed: { bg: "var(--accent-green-soft)", border: "rgba(52,211,153,0.2)", color: "var(--accent-green)", icon: "✅", label: "All Checks Passed" },
         blocked: { bg: "var(--accent-red-soft)", border: "rgba(248,113,113,0.2)", color: "var(--accent-red)", icon: "🚫", label: "Request Blocked" },
         filtered: { bg: "var(--accent-amber-soft)", border: "rgba(251,191,36,0.2)", color: "var(--accent-amber)", icon: "⚠️", label: "Response Filtered" },
+<<<<<<< HEAD
         error: { bg: "var(--accent-red-soft)", border: "rgba(248,113,113,0.3)", color: "var(--accent-red)", icon: "⚠️", label: "Provider Error" },
+=======
+>>>>>>> 41a27c22ffe0732f0ad03e20dc6fc7f63887f5ed
     };
     const c = colors[status] || colors.passed;
     return `
@@ -411,6 +430,7 @@ function showToast(message, type = "success") {
         setTimeout(() => toast.remove(), 300);
     }, 3000);
 }
+<<<<<<< HEAD
 
 // ── Evaluation & Metrics Dashboard Logic ─────────────────────────────────
 
@@ -736,3 +756,5 @@ function renderMetricsTable(data) {
     `;
     tbody.appendChild(trOverall);
 }
+=======
+>>>>>>> 41a27c22ffe0732f0ad03e20dc6fc7f63887f5ed

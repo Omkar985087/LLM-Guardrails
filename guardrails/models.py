@@ -21,7 +21,10 @@ class GuardrailStatus(str, Enum):
     PASSED = "passed"
     BLOCKED = "blocked"
     FILTERED = "filtered"
+<<<<<<< HEAD
     ERROR = "error"
+=======
+>>>>>>> 41a27c22ffe0732f0ad03e20dc6fc7f63887f5ed
 
 
 class CheckType(str, Enum):

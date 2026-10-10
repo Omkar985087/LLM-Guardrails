@@ -6,4 +6,7 @@ pydantic
 jsonschema
 python-dotenv
 better-profanity
+<<<<<<< HEAD
 jinja2
+=======
+>>>>>>> 41a27c22ffe0732f0ad03e20dc6fc7f63887f5ed

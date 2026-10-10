@@ -4,6 +4,7 @@ version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.13"
+<<<<<<< HEAD
 dependencies = [
     "better-profanity>=0.7.0",
     "fastapi>=0.143.0",
@@ -15,3 +16,6 @@ dependencies = [
     "pyyaml>=6.0.3",
     "uvicorn[standard]>=0.54.0",
 ]
+=======
+dependencies = []
+>>>>>>> 41a27c22ffe0732f0ad03e20dc6fc7f63887f5ed

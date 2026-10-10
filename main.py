@@ -14,13 +14,17 @@ import logging
 from contextlib import asynccontextmanager
 from pathlib import Path
 
+<<<<<<< HEAD
 from dotenv import load_dotenv
+=======
+>>>>>>> 41a27c22ffe0732f0ad03e20dc6fc7f63887f5ed
 from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
 from guardrails.input_guards import run_input_guards
+<<<<<<< HEAD
 from guardrails.llm_client import format_llm_error, generate
 from guardrails.models import ChatRequest, ChatResponse, GuardrailResult, GuardrailStatus
 from guardrails.output_guards import run_output_guards
@@ -34,6 +38,12 @@ if ENV_FILE.exists():
     load_dotenv(dotenv_path=ENV_FILE)
 else:
     load_dotenv()
+=======
+from guardrails.llm_client import generate
+from guardrails.models import ChatRequest, ChatResponse, GuardrailResult, GuardrailStatus
+from guardrails.output_guards import run_output_guards
+from guardrails.policy import get_policy, load_policy, reload_policy
+>>>>>>> 41a27c22ffe0732f0ad03e20dc6fc7f63887f5ed
 
 # ---------------------------------------------------------------------------
 # Logging
@@ -127,6 +137,7 @@ async def reload_policy_endpoint():
         return JSONResponse(status_code=500, content={"error": str(e)})
 
 
+<<<<<<< HEAD
 @app.post("/evaluation/run")
 async def run_evaluation_endpoint():
     """Execute the guardrail evaluation benchmark and return calculated metrics."""
@@ -152,6 +163,8 @@ async def get_evaluation_results_endpoint():
     return results
 
 
+=======
+>>>>>>> 41a27c22ffe0732f0ad03e20dc6fc7f63887f5ed
 @app.post("/chat", response_model=ChatResponse)
 async def chat(req: ChatRequest):
     """
@@ -196,14 +209,23 @@ async def chat(req: ChatRequest):
             llm_response = generate(prompt, policy, correction_hint=correction_hint)
         except Exception as exc:
             logger.error("❌ LLM call failed: %s", exc)
+<<<<<<< HEAD
             user_message = format_llm_error(exc, model_name=policy.llm.model)
             return ChatResponse(
                 status=GuardrailStatus.ERROR,
+=======
+            return ChatResponse(
+                status=GuardrailStatus.BLOCKED,
+>>>>>>> 41a27c22ffe0732f0ad03e20dc6fc7f63887f5ed
                 response=None,
                 input_guardrails=input_results,
                 output_guardrails=[],
                 retries_used=retries_used,
+<<<<<<< HEAD
                 message=user_message,
+=======
+                message=f"LLM call failed: {exc}",
+>>>>>>> 41a27c22ffe0732f0ad03e20dc6fc7f63887f5ed
             )
 
         # Run output guardrails

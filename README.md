@@ -4,7 +4,11 @@ A middleware layer that sits between users and any LLM, enforcing **safety**, **
 
 ![Python](https://img.shields.io/badge/Python-3.13+-blue?logo=python&logoColor=white)
 ![FastAPI](https://img.shields.io/badge/FastAPI-0.136+-009688?logo=fastapi&logoColor=white)
+<<<<<<< HEAD
 ![Gemini](https://img.shields.io/badge/Google%20Gemini-3.8--flash-4285F4?logo=google&logoColor=white)
+=======
+![Gemini](https://img.shields.io/badge/Google%20Gemini-2.0--flash-4285F4?logo=google&logoColor=white)
+>>>>>>> 41a27c22ffe0732f0ad03e20dc6fc7f63887f5ed
 ![License](https://img.shields.io/badge/License-MIT-green)
 
 ---
@@ -49,6 +53,7 @@ cd LLM-Guardrails
 pip install -r requirements.txt
 ```
 
+<<<<<<< HEAD
 ### 2. Configure Environment Variables
 
 Copy `.env.example` to `.env`:
@@ -65,6 +70,18 @@ GEMINI_MODEL="gemini-3.8-flash"
 ```
 
 > Get an API key from [Google AI Studio](https://aistudio.google.com/apikey).
+=======
+### 2. Configure API Key
+
+Create a `.env` file in the project root:
+
+```env
+GOOGLE_API_KEY="your api key here"
+
+```
+
+> Get a free API key from [Google AI Studio](https://aistudio.google.com/apikey).
+>>>>>>> 41a27c22ffe0732f0ad03e20dc6fc7f63887f5ed
 
 ### 3. Run the Server
 
@@ -106,7 +123,10 @@ LLM Guardrails/
 ├── guardrails_policy.yaml     # YAML policy configuration
 ├── requirements.txt           # Python dependencies
 ├── .env                       # API keys (gitignored)
+<<<<<<< HEAD
 ├── .env.example               # Environment variables example template
+=======
+>>>>>>> 41a27c22ffe0732f0ad03e20dc6fc7f63887f5ed
 ├── guardrails/                # Core package
 │   ├── __init__.py
 │   ├── models.py              # Pydantic request/response models
@@ -114,7 +134,10 @@ LLM Guardrails/
 │   ├── input_guards.py        # Input guardrail checks
 │   ├── output_guards.py       # Output guardrail checks
 │   └── llm_client.py          # Google Gemini wrapper
+<<<<<<< HEAD
 ├── tests/                     # Automated test suite
+=======
+>>>>>>> 41a27c22ffe0732f0ad03e20dc6fc7f63887f5ed
 ├── templates/
 │   └── index.html             # Web dashboard
 └── static/
@@ -175,13 +198,20 @@ After editing, reload the policy via:
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
+<<<<<<< HEAD
 | `GET` | `/` | Web dashboard (Playground & Evaluation) |
+=======
+| `GET` | `/` | Web dashboard |
+>>>>>>> 41a27c22ffe0732f0ad03e20dc6fc7f63887f5ed
 | `POST` | `/chat` | Send a prompt through the guardrails pipeline |
 | `GET` | `/policy` | View current active policy as JSON |
 | `POST` | `/reload-policy` | Hot-reload policy from YAML |
 | `GET` | `/health` | Health check |
+<<<<<<< HEAD
 | `POST` | `/evaluation/run` | Execute benchmark evaluation against labeled dataset |
 | `GET` | `/evaluation/results` | Retrieve latest cached evaluation benchmark results |
+=======
+>>>>>>> 41a27c22ffe0732f0ad03e20dc6fc7f63887f5ed
 
 ### `POST /chat` — Request
 

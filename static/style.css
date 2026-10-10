@@ -387,6 +387,7 @@ body {
     border-bottom-left-radius: 4px;
     color: var(--accent-amber);
 }
+<<<<<<< HEAD
 .chat-bubble.error {
     align-self: flex-start;
     background: rgba(248, 113, 113, 0.12);
@@ -394,6 +395,8 @@ body {
     border-bottom-left-radius: 4px;
     color: var(--accent-red);
 }
+=======
+>>>>>>> 41a27c22ffe0732f0ad03e20dc6fc7f63887f5ed
 .chat-bubble .bubble-label {
     display: block;
     font-size: 0.65rem;
@@ -406,7 +409,10 @@ body {
 .chat-bubble.assistant .bubble-label { color: var(--accent-cyan); }
 .chat-bubble.blocked .bubble-label   { color: var(--accent-red); }
 .chat-bubble.filtered .bubble-label  { color: var(--accent-amber); }
+<<<<<<< HEAD
 .chat-bubble.error .bubble-label     { color: var(--accent-red); }
+=======
+>>>>>>> 41a27c22ffe0732f0ad03e20dc6fc7f63887f5ed
 
 /* Loading indicator */
 .chat-loading {
@@ -727,6 +733,7 @@ body {
         height: auto;
     }
 }
+<<<<<<< HEAD
 
 /* ============================================================
    Evaluation & Metrics Dashboard Styles
@@ -1143,3 +1150,5 @@ body {
     }
 }
 
+=======
+>>>>>>> 41a27c22ffe0732f0ad03e20dc6fc7f63887f5ed
